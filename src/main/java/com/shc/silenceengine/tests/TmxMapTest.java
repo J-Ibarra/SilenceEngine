@@ -63,8 +63,6 @@ public class TmxMapTest extends Game
 
     public static void main(String[] args) throws IOException
     {
-        //Logger.setPrintTimeStamps(false);
-        //Logger.addLogStream(FilePath.getExternalFile(System.getProperty("user.home") + "/TmxMapTest.log"));
 
         TmxMap map = new TmxMap(FilePath.getResourceFile("resources/example-isometric.tmx"));
 
