@@ -29,7 +29,6 @@ import com.shc.silenceengine.graphics.Batcher;
 import com.shc.silenceengine.graphics.Graphics2D;
 import com.shc.silenceengine.graphics.opengl.GL3Context;
 import com.shc.silenceengine.utils.GameTimer;
-import com.shc.silenceengine.utils.Logger;
 import com.shc.silenceengine.utils.NativesLoader;
 import com.shc.silenceengine.utils.TimeUtils;
 
@@ -205,13 +204,13 @@ public class Game implements IUpdatable
     {
         if (!running)
         {
-            Logger.log("Disposing the Game resources");
+        	SilenceEngine.getStaticLogger().info("Disposing the Game resources");
 
             instance.dispose();
 
             SilenceEngine.getInstance().dispose();
 
-            Logger.log("This game has been terminated successfully");
+            SilenceEngine.getStaticLogger().info("This game has been terminated successfully");
             System.exit(0);
         }
 
@@ -242,10 +241,10 @@ public class Game implements IUpdatable
         SilenceEngine.getInstance().init();
 
         // Initialize the Game
-        Logger.log("Initializing the Game resources");
+        SilenceEngine.getStaticLogger().info("Initializing the Game resources");
         init();
         Runtime.getRuntime().gc();
-        Logger.log("Game initialized successfully, proceeding to the main loop");
+        SilenceEngine.getStaticLogger().info("Game initialized successfully, proceeding to the main loop");
 
         // GameLoop constants
         final double second = TimeUtils.convert(1, TimeUtils.Unit.SECONDS, TimeUtils.getDefaultTimeUnit());

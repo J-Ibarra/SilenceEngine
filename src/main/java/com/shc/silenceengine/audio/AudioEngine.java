@@ -28,7 +28,8 @@ import com.shc.silenceengine.audio.formats.OggReader;
 import com.shc.silenceengine.audio.formats.WaveReader;
 import com.shc.silenceengine.audio.openal.ALContext;
 import com.shc.silenceengine.core.IEngine;
-import com.shc.silenceengine.utils.Logger;
+import com.shc.silenceengine.core.SilenceEngine;
+
 import org.lwjgl.openal.ALC10;
 import org.lwjgl.openal.ALDevice;
 
@@ -49,7 +50,7 @@ public final class AudioEngine implements IEngine
      */
     public void init()
     {
-        Logger.log("Initializing Audio Engine with OpenAL 1.1");
+    	SilenceEngine.getStaticLogger().info("Initializing Audio Engine with OpenAL 1.1");
 
         // Initialize OpenAL context
         ALContext.getInstance().init();
@@ -58,7 +59,7 @@ public final class AudioEngine implements IEngine
         WaveReader.register();
         OggReader.register();
 
-        Logger.log("Audio Engine initialized successfully, with device "
+        SilenceEngine.getStaticLogger().info("Audio Engine initialized successfully, with device "
                    + ALC10.alcGetString(getALDevice().getPointer(), ALC10.ALC_DEVICE_SPECIFIER));
     }
 
@@ -75,9 +76,9 @@ public final class AudioEngine implements IEngine
     @Override
     public void dispose()
     {
-        Logger.log("Disposing the Audio Engine, and any audio resources");
+    	SilenceEngine.getStaticLogger().info("Disposing the Audio Engine, and any audio resources");
         ALContext.getInstance().dispose();
-        Logger.log("Audio Engine has been successfully disposed");
+        SilenceEngine.getStaticLogger().info("Audio Engine has been successfully disposed");
     }
 
     /**

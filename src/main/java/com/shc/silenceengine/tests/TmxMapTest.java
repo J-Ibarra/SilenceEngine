@@ -43,8 +43,6 @@ import com.shc.silenceengine.scene.tiled.objects.TmxPolygon;
 import com.shc.silenceengine.scene.tiled.renderers.TmxMapRenderer;
 import com.shc.silenceengine.scene.tiled.tiles.TmxAnimationFrame;
 import com.shc.silenceengine.scene.tiled.tiles.TmxTile;
-import com.shc.silenceengine.utils.Logger;
-
 import java.io.IOException;
 
 /**
@@ -65,53 +63,53 @@ public class TmxMapTest extends Game
 
     public static void main(String[] args) throws IOException
     {
-        Logger.setPrintTimeStamps(false);
-        Logger.addLogStream(FilePath.getExternalFile(System.getProperty("user.home") + "/TmxMapTest.log"));
+        //Logger.setPrintTimeStamps(false);
+        //Logger.addLogStream(FilePath.getExternalFile(System.getProperty("user.home") + "/TmxMapTest.log"));
 
         TmxMap map = new TmxMap(FilePath.getResourceFile("resources/example-isometric.tmx"));
 
         printHeader("Map");
-        Logger.log("Version:          " + map.getVersion());
-        Logger.log("Orientation:      " + map.getOrientation());
-        Logger.log("Background Color: " + map.getBackgroundColor());
-        Logger.log("Render Order:     " + map.getRenderOrder());
-        Logger.log("Stagger Axis:     " + map.getStaggerAxis());
-        Logger.log("Stagger Index:    " + map.getStaggerIndex());
+        SilenceEngine.getStaticLogger().info("Version:          " + map.getVersion());
+        SilenceEngine.getStaticLogger().info("Orientation:      " + map.getOrientation());
+        SilenceEngine.getStaticLogger().info("Background Color: " + map.getBackgroundColor());
+        SilenceEngine.getStaticLogger().info("Render Order:     " + map.getRenderOrder());
+        SilenceEngine.getStaticLogger().info("Stagger Axis:     " + map.getStaggerAxis());
+        SilenceEngine.getStaticLogger().info("Stagger Index:    " + map.getStaggerIndex());
 
-        Logger.log("");
+        SilenceEngine.getStaticLogger().info("");
 
-        Logger.log("Width:       " + map.getWidth());
-        Logger.log("Height:      " + map.getHeight());
-        Logger.log("Tile Width:  " + map.getTileWidth());
-        Logger.log("Tile Height: " + map.getTileHeight());
+        SilenceEngine.getStaticLogger().info("Width:       " + map.getWidth());
+        SilenceEngine.getStaticLogger().info("Height:      " + map.getHeight());
+        SilenceEngine.getStaticLogger().info("Tile Width:  " + map.getTileWidth());
+        SilenceEngine.getStaticLogger().info("Tile Height: " + map.getTileHeight());
 
         int i = 0;
         for (TmxTileSet tileSet : map.getTileSets())
         {
             printHeader("TileSet " + i);
 
-            Logger.log("Name:         " + tileSet.getName());
-            Logger.log("Margin:       " + tileSet.getMargin());
-            Logger.log("Spacing:      " + tileSet.getSpacing());
-            Logger.log("First GID:    " + tileSet.getFirstGID());
-            Logger.log("Image Width:  " + tileSet.getImage().getWidth());
-            Logger.log("Image Height: " + tileSet.getImage().getHeight());
-            Logger.log("Image Source: " + tileSet.getImage().getSource());
-            Logger.log("Trans Color:  " + tileSet.getImage().getTrans());
+            SilenceEngine.getStaticLogger().info("Name:         " + tileSet.getName());
+            SilenceEngine.getStaticLogger().info("Margin:       " + tileSet.getMargin());
+            SilenceEngine.getStaticLogger().info("Spacing:      " + tileSet.getSpacing());
+            SilenceEngine.getStaticLogger().info("First GID:    " + tileSet.getFirstGID());
+            SilenceEngine.getStaticLogger().info("Image Width:  " + tileSet.getImage().getWidth());
+            SilenceEngine.getStaticLogger().info("Image Height: " + tileSet.getImage().getHeight());
+            SilenceEngine.getStaticLogger().info("Image Source: " + tileSet.getImage().getSource());
+            SilenceEngine.getStaticLogger().info("Trans Color:  " + tileSet.getImage().getTrans());
 
             for (TmxTile tile : tileSet.getTiles())
             {
-                tile.getProperties().forEach((k, v) -> Logger.log(k + " => " + v));
+                tile.getProperties().forEach((k, v) -> SilenceEngine.getStaticLogger().info(k + " => " + v));
 
                 if (tile.isAnimated())
                 {
-                    Logger.log("Tile is animated: " + tile.getFrameCount() + " frames with total duration of " +
+                	SilenceEngine.getStaticLogger().info("Tile is animated: " + tile.getFrameCount() + " frames with total duration of " +
                                tile.getTotalDuration() + "ms");
 
                     int j = 0;
                     for (TmxAnimationFrame frame : tile.getFrames())
                     {
-                        Logger.log(String.format("\tFrame %d: TileID = %d, Duration = %dms", j, frame.getTileID(), frame.getDuration()));
+                    	SilenceEngine.getStaticLogger().info(String.format("\tFrame %d: TileID = %d, Duration = %dms", j, frame.getTileID(), frame.getDuration()));
                         j++;
                     }
                 }
@@ -154,7 +152,7 @@ public class TmxMapTest extends Game
                         info += "........    ";
                 }
 
-                Logger.log(info);
+                SilenceEngine.getStaticLogger().info(info);
             }
 
             i++;
@@ -168,10 +166,10 @@ public class TmxMapTest extends Game
             int j = 0;
             for (TmxObject object : objectLayer.getObjects())
             {
-                Logger.log("Object " + j);
-                Logger.log("Name: " + object.getName());
-                Logger.log("Position: [" + object.getX() + ", " + object.getY() + "]");
-                Logger.log("Size: [" + object.getWidth() + ", " + object.getHeight() + "]");
+            	SilenceEngine.getStaticLogger().info("Object " + j);
+            	SilenceEngine.getStaticLogger().info("Name: " + object.getName());
+            	SilenceEngine.getStaticLogger().info("Position: [" + object.getX() + ", " + object.getY() + "]");
+            	SilenceEngine.getStaticLogger().info("Size: [" + object.getWidth() + ", " + object.getHeight() + "]");
 
                 TmxPolygon polygon = object.getPolygon();
                 if (polygon != null)
@@ -179,7 +177,7 @@ public class TmxMapTest extends Game
                     for (int k = 0; k < polygon.getNumPoints(); k++)
                     {
                         TmxPoint point = polygon.getPoint(k);
-                        Logger.log("Polygon point " + k + " [" + point.x + ", " + point.y + "]");
+                        SilenceEngine.getStaticLogger().info("Polygon point " + k + " [" + point.x + ", " + point.y + "]");
                     }
                 }
 
@@ -189,7 +187,7 @@ public class TmxMapTest extends Game
                     for (int k = 0; k < polyLine.getNumPoints(); k++)
                     {
                         TmxPoint point = polyLine.getPoint(k);
-                        Logger.log("Polygon point " + k + " [" + point.x + ", " + point.y + "]");
+                        SilenceEngine.getStaticLogger().info("Polygon point " + k + " [" + point.x + ", " + point.y + "]");
                     }
                 }
 
@@ -204,9 +202,9 @@ public class TmxMapTest extends Game
 
     private static void printHeader(String title)
     {
-        Logger.log("======================================================================================");
-        Logger.log(title);
-        Logger.log("======================================================================================");
+    	SilenceEngine.getStaticLogger().info("======================================================================================");
+    	SilenceEngine.getStaticLogger().info(title);
+    	SilenceEngine.getStaticLogger().info("======================================================================================");
     }
 
     @Override

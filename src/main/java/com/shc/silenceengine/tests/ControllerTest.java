@@ -26,9 +26,9 @@ package com.shc.silenceengine.tests;
 
 import com.shc.silenceengine.core.Display;
 import com.shc.silenceengine.core.Game;
+import com.shc.silenceengine.core.SilenceEngine;
 import com.shc.silenceengine.input.Controller;
 import com.shc.silenceengine.input.Keyboard;
-import com.shc.silenceengine.utils.Logger;
 
 /**
  * @author Sri Harsha Chilakapati
@@ -45,7 +45,7 @@ public class ControllerTest extends Game
     {
         if (Controller.getConnectedControllers().length == 0)
         {
-            Logger.warn("Error, no controller detected!");
+        	SilenceEngine.getStaticLogger().warn("Error, no controller detected!");
             Game.end();
         }
 
